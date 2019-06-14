@@ -10,6 +10,12 @@ const config = {
     filename: 'js/[name].js',
     publicPath: '/dist/'
   },
+  resolve: {
+    alias: {
+      page: path.resolve(__dirname, "src/page"),
+      component: path.resolve(__dirname, "src/component")
+    }
+  },
   module: {
     rules: [
       // jsx文件的处理
@@ -81,7 +87,10 @@ const config = {
     })
   ],
   devServer: {
-    port: 8089
+    port: 8089,
+    historyApiFallback: {
+      index: '/dist/index.html'
+    }
   }
 };
 
