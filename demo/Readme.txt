@@ -27,5 +27,6 @@ React16+React-Router4 从零打造企业级电商后台管理系统
 	file-loader@1.1.6
 	url-loader@0.6.2
 	webpack-dev-server@2.9.7
+	react-router-dom@4.2.2
 
 	font-awesome
