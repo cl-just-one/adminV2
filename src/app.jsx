@@ -1,8 +1,8 @@
 /*
  * @Author: mikey.zhaopeng 
  * @Date: 2019-06-14 15:23:50 
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2019-06-14 16:36:24
+ * @Last Modified by: chenglin
+ * @Last Modified time: 2019-06-17 14:59:19
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -10,7 +10,6 @@ import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-do
 
 import Layout from 'component/layout/index.jsx'
 import Home from 'page/home/index.jsx'
-
 class App extends React.Component {
   render () {
     return (
