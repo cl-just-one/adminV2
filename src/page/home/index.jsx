@@ -1,10 +1,11 @@
 import React from 'react';
+import PageTitle from 'component/page-title/index.jsx'
 
 class Home extends React.Component {
   render () { 
     return (
       <div id="page-wrapper">
-        <button className="btn btn-danger">Test</button>
+        <PageTitle title="首页"/>
       </div>
     );
   }
