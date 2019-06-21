@@ -2,18 +2,31 @@
  * @Author: chenglin 
  * @Date: 2019-06-18 11:28:23 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-20 15:47:33
+ * @Last Modified time: 2019-06-21 15:18:00
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import MUtil from 'util/mm.jsx';
+import User from 'service/user-service.jsx';
+
+const _mm = new MUtil();
+const _user = new User();
 
 class NavTop extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      username: _mm.getLocalStorage("userInfo").username
+    }
   }
   // 退出登录
   onLogout() {
-    //todo
+    _user.logout().then(res => {
+      _mm.removeLocalStorage('userInfo');
+      window.location.href = '/login';
+    }, errMsg => {
+        _mm.errorTips(errMsg);
+    });
   }
   render() {
     return (
@@ -23,12 +36,15 @@ class NavTop extends Component {
             <b>HAPPY</b>MMALL
           </Link>
         </div>
-
         <ul className="nav navbar-top-links navbar-right">
           <li className="dropdown">
             <a className="dropdown-toggle" href="javascript:;">
               <i className="fa fa-user fa-fw"></i>
-                <span>欢迎，admin</span>
+                {
+                  this.state.username
+                  ? <span>欢迎，{this.state.username}</span>
+                  : <span>欢迎你</span>
+                }
               <i className="fa fa-caret-down"></i>
             </a>
             <ul className="dropdown-menu dropdown-user">

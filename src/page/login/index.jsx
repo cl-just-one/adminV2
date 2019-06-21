@@ -42,7 +42,8 @@ class Login extends Component {
     let loginCheckResult = _user.checkLogin(loginInfo);
     if (loginCheckResult.status) {
       _user.login(loginInfo).then((res) => {
-        this.props.history.push(this.state.redirect)
+        _mm.setLocalStorage("userInfo", res);
+        this.props.history.push(this.state.redirect);
       }, (errMsg) => {
         _mm.errorTip(errMsg)
       })

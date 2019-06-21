@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2019-06-14 15:23:50 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 10:27:01
+ * @Last Modified time: 2019-06-21 14:03:07
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -21,10 +21,10 @@ class App extends React.Component {
             return <Layout>
               <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/product" component={Home}/>
-                <Route exact path="/product-category" component={Home}/>
-                <Route exact path="/order" component={Home}/>
-                <Route exact path="/user" component={Home}/>
+                <Route path="/product" component={Home}/>
+                <Route path="/product-category" component={Home}/>
+                <Route path="/order" component={Home}/>
+                <Route path="/user" component={Home}/>
               </Switch>
             </Layout>
           }}/>

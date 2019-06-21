@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-20 16:23:08 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 11:40:57
+ * @Last Modified time: 2019-06-21 14:52:56
  */
 class MUtil {
   request(param) {
@@ -40,9 +40,36 @@ class MUtil {
         result = queryString.match(reg);
     return result?result[2]:'';
   }
+  // 错误提示
   errorTip(msg) {
     alert(msg);
   }
+  // 本地存储
+  setLocalStorage(name, data) {
+    let dataType = typeof data;
+    if (dataType == "object") {
+      window.localStorage.setItem(name, JSON.stringify(data));
+    } else if (["number", "string", "boolean"].indexOf(dataType) >= 0) {
+      window.localStorage.setItem(name, data);
+    } else {
+      alert("该数据结构不能用于本地存储")
+    }
+  }
+  // 获取本地存储
+  getLocalStorage(name) {
+    let data = window.localStorage.getItem(name);
+    if(data) {
+        return JSON.parse(data);
+    }
+    else{
+        return '';
+    }
+  }
+  // 删除本地存储
+  removeLocalStorage(name) {
+    window.localStorage.removeItem(name);
+  }
+  
 }
 
 export default MUtil;

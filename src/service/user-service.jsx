@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-21 10:23:25 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 11:45:38
+ * @Last Modified time: 2019-06-21 15:15:18
  */
 import MUtil from 'util/mm.jsx'
 
@@ -39,6 +39,13 @@ class User {
       status: true,
       msg: "验证通过"
     }
+  }
+  // 退出登录
+  logout() {
+    return _mm.request({
+      type: 'post',
+      url: '/user/logout.do'
+    });
   }
 }
 
