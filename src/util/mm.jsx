@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-20 16:23:08 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 14:52:56
+ * @Last Modified time: 2019-06-21 17:19:14
  */
 class MUtil {
   request(param) {
@@ -23,7 +23,7 @@ class MUtil {
           }
         },
         error: (err) => {
-          typeof reject == 'function' && reject(res.statusText)
+          typeof reject == 'function' && reject(err.statusText)
         }
       })
     })
