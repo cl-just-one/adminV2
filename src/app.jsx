@@ -2,7 +2,7 @@
  * @Author: mikey.zhaopeng 
  * @Date: 2019-06-14 15:23:50 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-20 16:56:09
+ * @Last Modified time: 2019-06-21 10:27:01
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -18,7 +18,7 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" component={Login}/>
           <Route path="/" render={(props) => {
-            <Layout>
+            return <Layout>
               <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/product" component={Home}/>
