@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-21 10:23:25 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 15:15:18
+ * @Last Modified time: 2019-06-24 13:49:50
  */
 import MUtil from 'util/mm.jsx'
 
@@ -46,6 +46,16 @@ class User {
       type: 'post',
       url: '/user/logout.do'
     });
+  }
+  // 获取用户列表
+  getUserList(pageNum) {
+    return _mm.request({
+      type: 'post',
+      url: '/manage/user/list.do',
+      data: {
+        pageNum: pageNum
+      }
+    })
   }
 }
 
