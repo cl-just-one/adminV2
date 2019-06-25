@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:41:57 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 09:19:21
+ * @Last Modified time: 2019-06-25 13:50:02
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -102,7 +102,7 @@ class ProductList extends Component {
           </td>
           <td>{product.price}</td>
           <td>
-            <p>{product.status == 1 ? "上架" : "已下架"}</p>
+            <p>{product.status == 1 ? "在售" : "已下架"}</p>
             <button className="btn btn-xs btn-warning"
               onClick={(e) => { this.loadProductStatus(e, product.id, product.status) }}>
               {product.status == 1 ? "下架" : "上架"}
@@ -117,7 +117,14 @@ class ProductList extends Component {
     });
     return (
       <div id="page-wrapper">
-        <PageTitle title="商品列表" />
+        <PageTitle title="商品列表">
+          <div className="page-header-right">
+            <Link to="/product/save" className="btn btn-primary">
+              <i className="fa fa-plus"></i>
+              <span>商品添加</span>
+            </Link>
+          </div>
+        </PageTitle>
         <ListSearch onSearch={(searchType, searchKeyword) => this.onSearch(searchType, searchKeyword)}/>
         <div className="row">
           <TableList tableHeads={tableHeads}>

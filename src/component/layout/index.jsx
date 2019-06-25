@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import NavTop from 'component/nav-top/index.jsx'
 import NavSidebar from 'component/nav-sidebar/index.jsx'
 import './theme.css'
+import './index.scss'
 
 class Layout extends Component {
   constructor (props) {

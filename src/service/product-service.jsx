@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:34:19 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 09:18:41
+ * @Last Modified time: 2019-06-25 14:21:31
  */
 import MUtil from 'util/mm.jsx'
 
@@ -33,6 +33,18 @@ class Product {
       type: 'post',
       url: '/manage/product/set_sale_status.do',
       data: productInfo
+    })
+  }
+  /**
+   * 品类查询
+  */
+  getCategoryList(firstCategoryId) {
+    return _mm.request({
+      type: 'post',
+      url: '/manage/category/get_category.do',
+      data: {
+        categoryId: firstCategoryId || 0
+      }
     })
   }
 }
