@@ -1,18 +1,52 @@
 import React, { Component } from 'react';
 import PageTitle from 'component/page-title/index.jsx';
+import MUtil from 'util/mm.jsx'
 import CategorySelector from 'page/product/index/category-selector.jsx';
+import FileUpload from 'util/file-uploader/index.jsx';
+
+import './save.scss'
+
+const _mm = new MUtil();
 
 class ProductSave extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryId: '',
+      parentCategoryId: '',
+      subImages: []
+    }
+  }
+  // 品类选择
   onCategoryChange(categoryId, parentCategoryId) {
     console.log("categoryId:", categoryId);
     console.log("parentCategoryId:", parentCategoryId);
-    
+  }
+  // 图片上传成功
+  uploadOnSuccess(res) {
+    this.state.subImages.push(res);
+    let newSubImages = this.state.subImages;
+    this.setState({
+      subImages: newSubImages
+    })
+  }
+  // 图片上传失败
+  uploadOnError(errMsg) {
+    _mm.errorTip(errMsg || '上传图片失败');
+  }
+  // 删除图片
+  onDeleteImage(e) {
+    let index = parseInt(e.target.getAttribute("index"));
+    this.state.subImages.splice(index, 1);
+    this.setState({
+      subImages: this.state.subImages
+    })
   }
   render() {
     return (
       <div id="page-wrapper">
         <PageTitle title="商品添加" />
-        <form className="form-horizontal">
+        <div className="form-horizontal">
           <div className="form-group">
             <label className="col-md-2 control-label">商品名称</label>
             <div className="col-md-5">
@@ -50,7 +84,23 @@ class ProductSave extends Component {
           <div className="form-group">
             <label className="col-md-2 control-label">商品图片</label>
             <div className="col-md-10">
-              KKK
+              {
+                this.state.subImages.length ?
+                (
+                  this.state.subImages.map((image, index) => {
+                    return (
+                      <div className="img-icon" key={index}>
+                        <img className="img" src={image.url}/>
+                        <i className="fa fa-close" index={index} onClick={(e) => {this.onDeleteImage(e)}}/>
+                      </div>
+                    )
+                  }) 
+                ) : <div>请上传图片</div>
+              }
+            </div>
+            <div className="col-md-offset-2 col-md-10 file-upload-con">
+              <FileUpload onSuccess={(res) => this.uploadOnSuccess(res)}
+                onError={(errMsg => this.uploadOnError(errMsg))}/>
             </div>
           </div>
           <div className="form-group">
@@ -64,7 +114,7 @@ class ProductSave extends Component {
               <button type="submit" className="btn btn-primary">提交</button>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     );
   }
