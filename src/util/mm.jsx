@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-20 16:23:08 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-21 17:19:14
+ * @Last Modified time: 2019-06-24 17:13:08
  */
 class MUtil {
   request(param) {
@@ -40,9 +40,13 @@ class MUtil {
         result = queryString.match(reg);
     return result?result[2]:'';
   }
+  // 成功提示
+  successTips(msg) {
+    alert(msg || "操作成功");
+  }
   // 错误提示
   errorTip(msg) {
-    alert(msg);
+    alert(msg || "好像哪里不对啦~");
   }
   // 本地存储
   setLocalStorage(name, data) {

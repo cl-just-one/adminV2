@@ -22,7 +22,7 @@ class Home extends React.Component {
     _statistic.getHomeCount().then((res) => {
       this.setState(res);
     }, (errMsg) => {
-      _mm.errrorTip(errMsg);
+      _mm.errorTip(errMsg);
     })
   }
   componentDidMount() {

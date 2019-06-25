@@ -2,10 +2,11 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 10:53:06 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-24 14:35:32
+ * @Last Modified time: 2019-06-24 17:50:20
  */
 import React, { Component } from 'react';
 import PageTitle from 'component/page-title/index.jsx'
+import TableList from 'util/table-list/index.jsx'
 import RcPagination from 'util/pagination/index.jsx'
 import MUtil from 'util/mm.jsx';
 import User from 'service/user-service.jsx';
@@ -18,15 +19,12 @@ class userList extends Component {
     super(props);
     this.state = {
       list: [],
-      pageNum: 1,
-      firstLoading: true
+      pageNum: 1
     }
   }
   loadUserList() {
     _user.getUserList(this.state.pageNum).then((res) => {
-      this.setState(res,() => {
-        this.state.firstLoading = false;
-      });
+      this.setState(res);
     }, (errorMsg) => {
       this.setState({
         list: []
@@ -45,7 +43,8 @@ class userList extends Component {
     });
   }
   render() {
-    let listBody = (
+    let tableHeads = ['ID', '用户名', '邮箱', '电话', '注册时间'];
+    let tableBody = (
       this.state.list.map((user, index) => {
         return (
           <tr key={index}>
@@ -58,36 +57,13 @@ class userList extends Component {
         );
       })
     );
-    let errorBody = (
-      <tr>
-        <td colSpan="5" className="text-center">
-          {
-            this.state.firstLoading ? '正在加载数据...' : '该列表数据为空!'
-          }
-        </td>
-      </tr>
-    );
-    let tableBody = this.state.list.length > 0 ? listBody : errorBody;
     return (
       <div id="page-wrapper">
-        <PageTitle title="用户"/>
+        <PageTitle title="用户列表"/>
         <div className="row">
-          <div className="col-md-12">
-            <table className="table table-triped table-bordered">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>用户名</th>
-                  <th>邮箱</th>
-                  <th>电话</th>
-                  <th>创建时间</th>
-                </tr>
-              </thead>
-              <tbody>
-                { tableBody }
-              </tbody>
-            </table>
-          </div>
+          <TableList tableHeads={tableHeads}>
+            { tableBody }
+          </TableList>
           <RcPagination current={this.state.pageNum}
             total={this.state.total}
             onChange={(pageNum) => {
