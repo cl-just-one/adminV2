@@ -3,6 +3,7 @@ import PageTitle from 'component/page-title/index.jsx';
 import MUtil from 'util/mm.jsx'
 import CategorySelector from 'page/product/index/category-selector.jsx';
 import FileUpload from 'util/file-uploader/index.jsx';
+import SimEditor from 'util/rich-editor/index.jsx';
 
 import './save.scss'
 
@@ -41,6 +42,11 @@ class ProductSave extends Component {
     this.setState({
       subImages: this.state.subImages
     })
+  }
+  // 富文本值改变
+  onValueChange(value) {
+    console.log(value);
+    
   }
   render() {
     return (
@@ -106,7 +112,7 @@ class ProductSave extends Component {
           <div className="form-group">
             <label className="col-md-2 control-label">商品详情</label>
             <div className="col-md-10">
-              XXX
+              <SimEditor onValueChange={value => {this.onValueChange(value)}}/>
             </div>
           </div>
           <div className="form-group">
