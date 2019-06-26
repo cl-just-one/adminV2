@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:36:21 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 09:58:12
+ * @Last Modified time: 2019-06-26 10:52:19
  */
 import React from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
@@ -14,7 +14,7 @@ class ProductRouter extends React.Component {
     return (
       <Switch>
         <Route path="/product/index" component={ProductList} />
-        <Route path="/product/save" component={ProductSave} />
+        <Route path="/product/save/:pid?" component={ProductSave} />
         <Redirect from="/product" to="/product/index" />
       </Switch>
     )

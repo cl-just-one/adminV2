@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-25 10:40:47 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 14:37:40
+ * @Last Modified time: 2019-06-26 11:21:17
  */
 import React, { Component } from 'react';
 import MUtil from 'util/mm.jsx'
@@ -25,6 +25,30 @@ class CategorySelector extends Component {
   }
   componentDidMount() {
     this.loadFirstCategoryList();
+  }
+  componentWillReceiveProps(nextProps) {
+    let categoryIdChange = this.state.firstCategoryId !== nextProps.categoryId,
+        parentCategoryIdChange = this.state.secondCategoryId !== nextProps.parentCategoryId;
+    // 数据没有发生变化的时候，直接不做处理
+    if(!categoryIdChange && !parentCategoryIdChange){
+      return;
+    }
+    // 假如只有一级品类
+    if (parentCategoryIdChange == 0) {
+      this.setState({
+        firstCategoryId: nextProps.parentCategoryId,
+        secondCategoryId: 0
+      })
+    }
+    // 有两级品类
+    else {
+      this.setState({
+        firstCategoryId: nextProps.parentCategoryId,
+        secondCategoryId: nextProps.categoryId
+      }, () => {
+        categoryIdChange && this.loadSecondCategoryList();
+      })
+    }
   }
   // 查询一级分类
   loadFirstCategoryList() {
@@ -79,6 +103,7 @@ class CategorySelector extends Component {
     return (
       <div className="col-md-10">
         <select className="form-control cate-selector"
+          value={this.state.firstCategoryId}
           onChange={(e) => {this.onFirstCategoryChange(e)}}>
           <option value=''>请选择一级分类</option>
           {
@@ -93,7 +118,8 @@ class CategorySelector extends Component {
           this.state.secondCategoryList.length ?
             (
               <select className="form-control cate-selector"
-              onChange={(e) => {this.onSecondCategoryChange(e)}}>
+                value={this.state.secondCategoryId}
+                onChange={(e) => {this.onSecondCategoryChange(e)}}>
                 <option value="">请选择二级分类</option>
                 {
                   this.state.secondCategoryList.map((category, index) => {

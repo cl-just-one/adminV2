@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-25 17:32:48 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 20:19:50
+ * @Last Modified time: 2019-06-26 11:30:11
  */
 import React, { Component } from 'react';
 import SimEditor from 'simditor';
@@ -12,6 +12,11 @@ import 'simditor/styles/simditor.scss'
 class RichEditor extends Component {
   componentDidMount() {
     this.loadRichDitor()
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.defaultDetail !== nextProps.defaultDetail) {
+      this.simditor.setValue(nextProps.defaultDetail);
+    }
   }
   loadRichDitor() {
     let element = this.refs['textarea'];

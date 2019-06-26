@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:34:19 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-26 09:16:47
+ * @Last Modified time: 2019-06-26 11:33:16
  */
 import MUtil from 'util/mm.jsx'
 
@@ -35,9 +35,18 @@ class Product {
       data: productInfo
     })
   }
+  // 获取商品信息
+  getProduct(id) {
+    return _mm.request({
+      type: 'post',
+      url: '/manage/product/detail.do',
+      data: {
+        productId: id || 0
+      }
+    })
+  }
   // 检查输入的字段
   checkProductInfo(productInfo) {
-
     // 商品名称检查
     if (typeof productInfo.name !== "string" || productInfo.name === '') {
       return {
@@ -53,7 +62,7 @@ class Product {
       }
     }
     // 品类检查
-    if (typeof productInfo.categoryId !== "string" || productInfo.categoryId == '0') {
+    if (typeof productInfo.categoryId !== "number" || productInfo.categoryId < 0) {
       return {
         status: false,
         msg: "请选择分类"

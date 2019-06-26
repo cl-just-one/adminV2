@@ -15,6 +15,7 @@ class ProductSave extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.match.params.pid,
       name: '',
       subtitle: '',
       categoryId: '',
@@ -24,6 +25,28 @@ class ProductSave extends Component {
       subImages: [],
       detail: '',
       status: 1 // 表示商品在售状态
+    }
+  }
+  componentDidMount() {
+    this.loadProduct();
+  }
+  // 加载产品信息
+  loadProduct() {
+    // 有id表示编辑功能，表单回填
+    if (this.state.id) {
+      _product.getProduct(this.state.id).then((res) => {
+        let images = res.subImages.split(",");
+        res.subImages = images.map((imgUri) => {
+          return {
+            uri: imgUri,
+            url: res.imageHost + imgUri
+          }
+        });
+        res.defaultDetail = res.detail;
+        this.setState(res);
+      }, (errMsg) => {
+        _mm.errorTip(errMsg);
+      })
     }
   }
   // 品类选择
@@ -55,8 +78,6 @@ class ProductSave extends Component {
   }
   // 富文本值改变
   onRichEditorValueChange(value) {
-    console.log(value);
-    
     this.setState({
       detail: value
     })
@@ -107,6 +128,7 @@ class ProductSave extends Component {
             <div className="col-md-5">
               <input type="text" className="form-control"
                 name="name"
+                value={this.state.name}
                 onChange={(e) => {this.onValueChange(e)}}
                 placeholder="请输入商品名称" />
             </div>
@@ -116,13 +138,16 @@ class ProductSave extends Component {
             <div className="col-md-5">
               <input type="text" className="form-control"
                 name="subtitle"
+                value={this.state.subtitle}
                 onChange={(e) => {this.onValueChange(e)}}
                 placeholder="请输入商品描述" />
             </div>
           </div>
           <div className="form-group">
             <label className="col-md-2 control-label">商品分类</label>
-            <CategorySelector onCategoryChange={(categoryId, parentCategoryId) => {this.onCategoryChange(categoryId, parentCategoryId)}}/>
+            <CategorySelector categoryId={this.state.categoryId}
+              parentCategoryId = {this.state.parentCategoryId}
+              onCategoryChange={(categoryId, parentCategoryId) => {this.onCategoryChange(categoryId, parentCategoryId)}}/>
           </div>
           <div className="form-group">
             <label className="col-md-2 control-label">价格</label>
@@ -130,6 +155,7 @@ class ProductSave extends Component {
               <div className="input-group">
                 <input type="number" className="form-control"
                   name="price"
+                  value={this.state.price}
                   onChange={(e) => {this.onValueChange(e)}}
                   placeholder="价格" />
                 <span className="input-group-addon">元</span>
@@ -142,6 +168,7 @@ class ProductSave extends Component {
               <div className="input-group">
                 <input type="number" className="form-control"
                   name="stock"
+                  value={this.state.stock}
                   onChange={(e) => {this.onValueChange(e)}}
                   placeholder="库存" />
                 <span className="input-group-addon">件</span>
@@ -173,7 +200,9 @@ class ProductSave extends Component {
           <div className="form-group">
             <label className="col-md-2 control-label">商品详情</label>
             <div className="col-md-10">
-              <SimEditor onRichValueChange={value => {this.onRichEditorValueChange(value)}}/>
+              <SimEditor detail={this.state.detail}
+                defaultDetail={this.state.defaultDetail}
+                onRichValueChange={value => {this.onRichEditorValueChange(value)}}/>
             </div>
           </div>
           <div className="form-group">
