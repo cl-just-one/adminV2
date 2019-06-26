@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:34:19 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-26 15:28:04
+ * @Last Modified time: 2019-06-26 18:03:30
  */
 import MUtil from 'util/mm.jsx'
 
@@ -116,6 +116,14 @@ class Product {
         categoryId: categoryInfo.categoryId,
         categoryName: categoryInfo.categoryName
       }
+    })
+  }
+  // 增加pinlei
+  addCategory(categoryInfo) {
+    return _mm.request({
+      type: 'post',
+      url: '/manage/category/add_category.do',
+      data: categoryInfo
     })
   }
 }

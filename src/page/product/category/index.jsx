@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-26 14:05:50 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-26 15:53:57
+ * @Last Modified time: 2019-06-26 18:05:59
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,8 @@ import TableList from 'util/table-list/index.jsx'
 
 import MUtil from 'util/mm.jsx';
 import Product from 'service/product-service.jsx';
+
+import './index.scss'
 
 const _mm = new MUtil();
 const _product = new Product();
@@ -49,7 +51,6 @@ class CategoryList extends Component {
         this.loadCategoryList();
       })
     }
-
   }
   // 更新品类的名字
   onUpdateName(categoryId, categoryName) {
@@ -89,7 +90,14 @@ class CategoryList extends Component {
     );
     return (
       <div id="page-wrapper">
-        <PageTitle title="品类列表"/>
+        <PageTitle title="品类列表">
+        <div className="page-header-right">
+          <Link to="/product-category/add" className="btn btn-primary">
+            <i className="fa fa-plus"></i>
+            <span>品类添加</span>
+          </Link>
+        </div>
+        </PageTitle>
         <div className="row">
           <div className="col-md-12">
             <p>父品类ID: {this.state.parentCategoryId}</p>
