@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-24 15:34:19 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-26 11:33:16
+ * @Last Modified time: 2019-06-26 15:28:04
  */
 import MUtil from 'util/mm.jsx'
 
@@ -104,6 +104,17 @@ class Product {
       url: '/manage/category/get_category.do',
       data: {
         categoryId: firstCategoryId || 0
+      }
+    })
+  }
+  // 更新品类名称
+  updateCategoryName(categoryInfo) {
+    return _mm.request({
+      type: 'post',
+      url: '/manage/category/set_category_name.do',
+      data: {
+        categoryId: categoryInfo.categoryId,
+        categoryName: categoryInfo.categoryName
       }
     })
   }
