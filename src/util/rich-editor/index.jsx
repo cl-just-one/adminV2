@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-25 17:32:48 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-25 18:24:38
+ * @Last Modified time: 2019-06-25 20:19:50
  */
 import React, { Component } from 'react';
 import SimEditor from 'simditor';
@@ -29,7 +29,7 @@ class RichEditor extends Component {
   // 初始化富文本编辑器事件
   bindEditorEvent() {
     this.simditor.on("valuechanged", e => {
-      this.props.onValueChange(this.simditor.getValue());
+      this.props.onRichValueChange(this.simditor.getValue());
     })
   }
   render() {

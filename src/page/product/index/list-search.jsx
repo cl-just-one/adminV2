@@ -36,7 +36,7 @@ class listSearch extends Component {
                 name="searchType"
                 onChange={(e) => { this.onValChange(e) }}>
                 <option value="productId">按ID搜索商品</option>
-                <option value="productName">按类型搜索商品</option>
+                <option value="productName">按名称搜索商品</option>
               </select>
             </div>
             <div className="form-group">
