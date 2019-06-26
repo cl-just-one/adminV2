@@ -2,7 +2,7 @@
  * @Author: chenglin 
  * @Date: 2019-06-25 10:40:47 
  * @Last Modified by: chenglin
- * @Last Modified time: 2019-06-26 11:21:17
+ * @Last Modified time: 2019-06-26 11:59:33
  */
 import React, { Component } from 'react';
 import MUtil from 'util/mm.jsx'
@@ -71,6 +71,9 @@ class CategorySelector extends Component {
   }
   // 选择一级分类
   onFirstCategoryChange(e) {
+    if (this.props.readOnly) {
+      return;
+    }
     let newValue = e.target.value || 0;
     this.setState({
       firstCategoryId: newValue,
@@ -84,6 +87,9 @@ class CategorySelector extends Component {
   }
   // 选择二级分类
   onSecondCategoryChange(e) {
+    if (this.props.readOnly) {
+      return;
+    }
     let newValue = e.target.value || 0;
     this.setState({
       secondCategoryId: newValue
@@ -104,6 +110,7 @@ class CategorySelector extends Component {
       <div className="col-md-10">
         <select className="form-control cate-selector"
           value={this.state.firstCategoryId}
+          readOnly={this.props.readOnly}
           onChange={(e) => {this.onFirstCategoryChange(e)}}>
           <option value=''>请选择一级分类</option>
           {
@@ -119,6 +126,7 @@ class CategorySelector extends Component {
             (
               <select className="form-control cate-selector"
                 value={this.state.secondCategoryId}
+                readOnly={this.props.readOnly}
                 onChange={(e) => {this.onSecondCategoryChange(e)}}>
                 <option value="">请选择二级分类</option>
                 {
