@@ -3,14 +3,14 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
-let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev'
-console.log(WEBPACK_ENV)
+let WEBPACK_ENV = process
+
 const config = {
   entry: './src/app.jsx',
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: 'js/[name].js',
-    publicPath: WEBPACK_ENV === 'dev' ? '/dist/' : '//XX.XX.com/'
+    publicPath: '/dist/'
   },
   resolve: {
     alias: {
