@@ -1,3 +1,6 @@
-<div align="center" style="color:blue">React16+React-Router4 企业级电商后台管理系统(使用手册)</div>
-#### 1. 首先，需安装node、vue、yarn
-#### 2. 项目需连接网络，因有CDN文件引入，执行 yarn add, 安装依赖包
+React16+React-Router4 企业级电商后台管理系统(使用手册)
+======
+1. 首先，需安装Node@8.11.4、Vue@2.9.3、yarn1.16.0、Webpack@3.10.0
+2. 项目需连接网络，因有CDN文件引入，执行 yarn add, 安装依赖包
+------
+# 一级标题测试
