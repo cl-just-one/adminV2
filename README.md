@@ -62,3 +62,9 @@ exact的值为bool型，为true时表示严格匹配，为false时为正常匹�
 <Route path='/page' component={Page} />
 //这样匹配路由path='/page'，只会匹配到Page组件
 ```
+### encodeURI()和encodeURIComponent()区别
+1、encodeURI()<br/>
+它着眼于对整个URL进行编码，因此除了常见的符号以外，对其他一些在网址中有特殊含义的符号“; / ? : @ & = + $ , ' #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。<br/>
+2、encodeURIComponent()<br/>
+该方法不会对 ASCII 字母和数字进行编码，也不会对这些 ASCII 标点符号进行编码： - _ . ! ~ * ' ( ) 。<br/>
+其他字符（比如 ：;/?:@&=+$,# 这些用于分隔 URI 组件的标点符号），都是由一个或多个十六进制的转义序列替换的。

@@ -38,7 +38,7 @@ class MUtil {
     let queryString = window.location.search.split("?")[1] || '',
         reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),
         result = queryString.match(reg);
-    return result?result[2]:'';
+    return result?decodeURIComponent(result[2]):'';
   }
   // 成功提示
   successTips(msg) {
